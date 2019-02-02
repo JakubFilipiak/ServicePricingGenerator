@@ -18,11 +18,13 @@ public class App extends Application {
 
         Scene scene = new Scene(layout);
         primaryStage.setScene(scene);
-        primaryStage.setTitle("Service Pricing Generator");
+        primaryStage.setTitle("Generator wycen - PDF");
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
 
     public static void main(String[] args) {
         launch(args);
+
     }
 }

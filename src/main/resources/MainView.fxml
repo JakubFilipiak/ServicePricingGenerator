@@ -1,6 +1,195 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" />
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="482.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Controller">
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Delete" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+   <left>
+      <VBox prefHeight="575.0" prefWidth="190.0" BorderPane.alignment="CENTER">
+         <children>
+            <Accordion>
+              <panes>
+                <TitledPane animated="false" prefHeight="405.0" prefWidth="190.0" text="Dane firmy">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="495.0" prefWidth="188.0">
+                           <children>
+                              <Label layoutY="6.0" text="Nazwa firmy" />
+                              <TextField fx:id="companyNameTextField" layoutY="23.0" prefHeight="25.0" prefWidth="188.0" />
+                              <Label layoutY="48.0" text="Adres" />
+                              <TextField fx:id="companyAddressTextField" layoutY="65.0" prefHeight="25.0" prefWidth="188.0" />
+                              <Label layoutY="90.0" text="E-mail" />
+                              <TextField fx:id="companyEmailTextField" layoutY="107.0" prefHeight="25.0" prefWidth="188.0" />
+                              <Label layoutY="132.0" text="Strona internetowa" />
+                              <TextField fx:id="companyWebsiteTextField" layoutY="149.0" prefHeight="25.0" prefWidth="188.0" />
+                              <Label layoutY="174.0" text="Telefon kontaktowy" />
+                              <TextField fx:id="companyMobileTextField" layoutY="191.0" prefHeight="25.0" prefWidth="188.0" />
+                              <Label layoutY="216.0" text="NIP" />
+                              <TextField fx:id="companyTaxNumberTextField" layoutY="233.0" prefHeight="25.0" prefWidth="188.0" />
+                              <Label layoutY="258.0" text="Logo" />
+                              <Button layoutX="107.0" layoutY="300.0" mnemonicParsing="false" onAction="#chooseLogoFile" text="Wybierz plik" />
+                              <Separator layoutX="1.0" layoutY="324.0" prefHeight="25.0" prefWidth="187.0" />
+                              <Button layoutX="1.0" layoutY="349.0" mnemonicParsing="false" onAction="#createCompany" text="Zapisz" />
+                              <Button layoutX="139.0" layoutY="349.0" mnemonicParsing="false" text="Edytuj" />
+                              <Label fx:id="logoFileNameLabel" layoutX="14.0" layoutY="275.0" text="brak pliku">
+                                 <font>
+                                    <Font name="System Italic" size="12.0" />
+                                 </font>
+                              </Label>
+                           </children></AnchorPane>
+                  </content>
+                </TitledPane>
+                <TitledPane animated="false" prefHeight="295.0" prefWidth="190.0" text="Dane klienta">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="310.0" prefWidth="188.0">
+                           <children>
+                              <Label layoutX="2.0" layoutY="6.0" text="Nazwa firmy" />
+                              <TextField fx:id="clientNameTextField" layoutY="23.0" prefHeight="25.0" prefWidth="188.0" />
+                              <Label layoutX="4.0" layoutY="48.0" text="Adres" />
+                              <TextField fx:id="clientAddressTextField" layoutY="65.0" prefHeight="25.0" prefWidth="188.0" />
+                              <Label layoutX="3.0" layoutY="90.0" text="E-mail" />
+                              <TextField fx:id="clientEmailTextField" layoutY="107.0" prefHeight="25.0" prefWidth="188.0" />
+                              <Label layoutY="132.0" text="Telefon kontakowy" />
+                              <TextField fx:id="clientMobileTextField" layoutY="149.0" prefHeight="25.0" prefWidth="188.0" />
+                              <Label layoutX="1.0" layoutY="174.0" prefHeight="17.0" prefWidth="23.0" text="NIP" />
+                              <TextField fx:id="clientTaxNumberTextField" layoutY="188.0" prefHeight="25.0" prefWidth="188.0" />
+                              <Separator layoutX="1.0" layoutY="213.0" prefHeight="25.0" prefWidth="187.0" />
+                              <Button layoutX="-1.0" layoutY="232.0" mnemonicParsing="false" onAction="#createClient" text="Zapisz" />
+                              <Button layoutX="139.0" layoutY="232.0" mnemonicParsing="false" text="Edytuj" />
+                           </children></AnchorPane>
+                  </content>
+                </TitledPane>
+                  <TitledPane animated="false" prefHeight="427.0" prefWidth="190.0" text="Autor wyceny">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="310.0" prefWidth="188.0">
+                           <children>
+                              <Label layoutX="2.0" layoutY="6.0" text="Imię i nazwisko" />
+                              <TextField layoutY="23.0" prefHeight="25.0" prefWidth="188.0" />
+                              <Label layoutX="4.0" layoutY="48.0" text="Adres e-mail" />
+                              <TextField layoutY="65.0" prefHeight="25.0" prefWidth="188.0" />
+                              <Separator layoutX="1.0" layoutY="90.0" prefHeight="25.0" prefWidth="187.0" />
+                              <Button layoutX="1.0" layoutY="115.0" mnemonicParsing="false" text="Zapisz" />
+                              <Button layoutX="139.0" layoutY="115.0" mnemonicParsing="false" text="Edytuj" />
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </TitledPane>
+              </panes>
+            </Accordion>
+         </children>
+      </VBox>
+   </left>
+   <center>
+      <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <bottom>
+            <VBox prefHeight="62.0" prefWidth="710.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label text="Uwagi" />
+                  <HBox prefHeight="42.0" prefWidth="710.0">
+                     <children>
+                        <TextArea prefWidth="511.0" wrapText="true" />
+                        <Pane prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <Button layoutX="31.0" layoutY="9.0" mnemonicParsing="false" text="Wygeneruj plik wyceny" />
+                           </children>
+                        </Pane>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </bottom>
+         <left>
+            <Separator orientation="VERTICAL" prefHeight="200.0" BorderPane.alignment="CENTER" />
+         </left>
+         <top>
+            <HBox prefHeight="47.0" prefWidth="710.0" spacing="15.0" BorderPane.alignment="CENTER">
+               <children>
+                  <VBox alignment="TOP_CENTER" prefHeight="47.0" prefWidth="212.0">
+                     <children>
+                        <Label text="Nazwa" />
+                        <TextField />
+                     </children>
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label text="Numer" />
+                        <TextField />
+                     </children>
+                  </VBox>
+                  <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label text="Data utworzenia" />
+                        <Label text="xx.xx.xxxx" />
+                     </children>
+                  </VBox>
+                  <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label text="Data ważności" />
+                        <DatePicker />
+                     </children>
+                  </VBox>
+                  <Separator orientation="VERTICAL" prefHeight="200.0" />
+                  <Pane prefHeight="47.0" prefWidth="122.0">
+                     <children>
+                        <Button layoutY="11.0" mnemonicParsing="false" text="Zapisz" />
+                        <Button layoutX="55.0" layoutY="11.0" mnemonicParsing="false" text="Edytuj" />
+                     </children>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                  </Pane>
+               </children>
+            </HBox>
+         </top>
+         <center>
+            <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Separator prefWidth="200.0" />
+               </children>
+            </VBox>
+         </center>
+      </BorderPane>
+   </center>
+</BorderPane>
