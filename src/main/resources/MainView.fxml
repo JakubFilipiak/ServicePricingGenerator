@@ -3,12 +3,15 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ContextMenu?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
@@ -63,10 +66,10 @@
                               <Label layoutY="216.0" text="NIP" />
                               <TextField fx:id="companyTaxNumberTextField" layoutY="233.0" prefHeight="25.0" prefWidth="188.0" />
                               <Label layoutY="258.0" text="Logo" />
-                              <Button layoutX="107.0" layoutY="300.0" mnemonicParsing="false" onAction="#chooseLogoFile" text="Wybierz plik" />
+                              <Button fx:id="logoFileChooserButton" layoutX="107.0" layoutY="300.0" mnemonicParsing="false" onAction="#chooseLogoFile" text="Wybierz plik" />
                               <Separator layoutX="1.0" layoutY="324.0" prefHeight="25.0" prefWidth="187.0" />
-                              <Button layoutX="1.0" layoutY="349.0" mnemonicParsing="false" onAction="#createCompany" text="Zapisz" />
-                              <Button layoutX="139.0" layoutY="349.0" mnemonicParsing="false" text="Edytuj" />
+                              <Button fx:id="saveCompanyButton" layoutX="1.0" layoutY="349.0" mnemonicParsing="false" onAction="#createCompany" text="Zapisz" />
+                              <Button fx:id="editCompanyButton" disable="true" layoutX="139.0" layoutY="349.0" mnemonicParsing="false" onAction="#enableCompanyEdit" text="Edytuj" />
                               <Label fx:id="logoFileNameLabel" layoutX="14.0" layoutY="275.0" text="brak pliku">
                                  <font>
                                     <Font name="System Italic" size="12.0" />
@@ -79,7 +82,7 @@
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="310.0" prefWidth="188.0">
                            <children>
-                              <Label layoutX="2.0" layoutY="6.0" text="Nazwa firmy" />
+                              <Label layoutX="2.0" layoutY="6.0" text="Nazwa" />
                               <TextField fx:id="clientNameTextField" layoutY="23.0" prefHeight="25.0" prefWidth="188.0" />
                               <Label layoutX="4.0" layoutY="48.0" text="Adres" />
                               <TextField fx:id="clientAddressTextField" layoutY="65.0" prefHeight="25.0" prefWidth="188.0" />
@@ -90,8 +93,8 @@
                               <Label layoutX="1.0" layoutY="174.0" prefHeight="17.0" prefWidth="23.0" text="NIP" />
                               <TextField fx:id="clientTaxNumberTextField" layoutY="188.0" prefHeight="25.0" prefWidth="188.0" />
                               <Separator layoutX="1.0" layoutY="213.0" prefHeight="25.0" prefWidth="187.0" />
-                              <Button layoutX="-1.0" layoutY="232.0" mnemonicParsing="false" onAction="#createClient" text="Zapisz" />
-                              <Button layoutX="139.0" layoutY="232.0" mnemonicParsing="false" text="Edytuj" />
+                              <Button fx:id="saveClientButton" layoutX="-1.0" layoutY="232.0" mnemonicParsing="false" onAction="#createClient" text="Zapisz" />
+                              <Button fx:id="editClientButton" disable="true" layoutX="139.0" layoutY="232.0" mnemonicParsing="false" onAction="#enableClientEdit" text="Edytuj" />
                            </children></AnchorPane>
                   </content>
                 </TitledPane>
@@ -100,12 +103,12 @@
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="310.0" prefWidth="188.0">
                            <children>
                               <Label layoutX="2.0" layoutY="6.0" text="Imię i nazwisko" />
-                              <TextField layoutY="23.0" prefHeight="25.0" prefWidth="188.0" />
+                              <TextField fx:id="authorNameTextField" layoutY="23.0" prefHeight="25.0" prefWidth="188.0" />
                               <Label layoutX="4.0" layoutY="48.0" text="Adres e-mail" />
-                              <TextField layoutY="65.0" prefHeight="25.0" prefWidth="188.0" />
+                              <TextField fx:id="authorEmailTextField" layoutY="65.0" prefHeight="25.0" prefWidth="188.0" />
                               <Separator layoutX="1.0" layoutY="90.0" prefHeight="25.0" prefWidth="187.0" />
-                              <Button layoutX="1.0" layoutY="115.0" mnemonicParsing="false" text="Zapisz" />
-                              <Button layoutX="139.0" layoutY="115.0" mnemonicParsing="false" text="Edytuj" />
+                              <Button fx:id="saveAuthorButton" layoutX="1.0" layoutY="115.0" mnemonicParsing="false" onAction="#createAuthor" text="Zapisz" />
+                              <Button fx:id="editAuthorButton" disable="true" layoutX="139.0" layoutY="115.0" mnemonicParsing="false" onAction="#enableAuthorEdit" text="Edytuj" />
                            </children>
                         </AnchorPane>
                      </content>
@@ -120,13 +123,19 @@
          <bottom>
             <VBox prefHeight="62.0" prefWidth="710.0" BorderPane.alignment="CENTER">
                <children>
-                  <Label text="Uwagi" />
+                  <Label text="Uwagi">
+                     <VBox.margin>
+                        <Insets left="5.0" />
+                     </VBox.margin></Label>
                   <HBox prefHeight="42.0" prefWidth="710.0">
                      <children>
-                        <TextArea prefWidth="511.0" wrapText="true" />
+                        <TextArea fx:id="pricingCommentTextField" prefWidth="511.0" wrapText="true">
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin></TextArea>
                         <Pane prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <Button layoutX="31.0" layoutY="9.0" mnemonicParsing="false" text="Wygeneruj plik wyceny" />
+                              <Button layoutX="31.0" layoutY="9.0" mnemonicParsing="false" onAction="#createPricingFile" text="Wygeneruj plik wyceny" />
                            </children>
                         </Pane>
                      </children>
@@ -143,7 +152,7 @@
                   <VBox alignment="TOP_CENTER" prefHeight="47.0" prefWidth="212.0">
                      <children>
                         <Label text="Nazwa" />
-                        <TextField />
+                        <TextField fx:id="pricingNameTextField" />
                      </children>
                      <HBox.margin>
                         <Insets left="5.0" />
@@ -152,26 +161,30 @@
                   <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
                      <children>
                         <Label text="Numer" />
-                        <TextField />
+                        <TextField fx:id="pricingNumberTextField" />
                      </children>
                   </VBox>
                   <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
                      <children>
                         <Label text="Data utworzenia" />
-                        <Label text="xx.xx.xxxx" />
+                        <Pane prefHeight="26.0" prefWidth="97.0">
+                           <children>
+                              <Label fx:id="pricingPreparationDateLabel" layoutX="24.0" layoutY="5.0" text="xx.xx.xxxx" />
+                           </children>
+                        </Pane>
                      </children>
                   </VBox>
                   <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
                      <children>
                         <Label text="Data ważności" />
-                        <DatePicker />
+                        <DatePicker fx:id="pricingValidityDatePicker" />
                      </children>
                   </VBox>
                   <Separator orientation="VERTICAL" prefHeight="200.0" />
                   <Pane prefHeight="47.0" prefWidth="122.0">
                      <children>
-                        <Button layoutY="11.0" mnemonicParsing="false" text="Zapisz" />
-                        <Button layoutX="55.0" layoutY="11.0" mnemonicParsing="false" text="Edytuj" />
+                        <Button fx:id="savePricingButton" layoutY="11.0" mnemonicParsing="false" onAction="#createPricing" text="Zapisz" />
+                        <Button fx:id="editPricingButton" disable="true" layoutX="55.0" layoutY="11.0" mnemonicParsing="false" onAction="#enablePricingEdit" text="Edytuj" />
                      </children>
                      <opaqueInsets>
                         <Insets />
@@ -186,7 +199,84 @@
          <center>
             <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
                <children>
-                  <Separator prefWidth="200.0" />
+                  <Separator prefHeight="10.0" prefWidth="704.0">
+                     <VBox.margin>
+                        <Insets right="5.0" />
+                     </VBox.margin></Separator>
+                  <Label text="Dodaj usługę" />
+                  <HBox alignment="CENTER" prefHeight="36.0" prefWidth="704.0">
+                     <children>
+                        <TextField fx:id="newServiceNameTextField" prefHeight="25.0" prefWidth="396.0" promptText="Nazwa usługi" />
+                        <TextField fx:id="newServiceAmountOfHoursTextField" prefHeight="25.0" prefWidth="95.0" promptText="Ilość godzin" />
+                        <TextField fx:id="newServiceUnitCostTextField" prefHeight="25.0" prefWidth="105.0" promptText="Koszt jednost." />
+                        <Pane prefHeight="19.0" prefWidth="110.0">
+                           <children>
+                              <Button layoutX="31.0" layoutY="6.0" mnemonicParsing="false" onAction="#addNewService" text="Dodaj" />
+                           </children>
+                        </Pane>
+                     </children>
+                  </HBox>
+                  <Separator prefHeight="13.0" prefWidth="704.0">
+                     <VBox.margin>
+                        <Insets right="5.0" />
+                     </VBox.margin>
+                  </Separator>
+                  <TableView fx:id="tableView" prefHeight="207.0" prefWidth="699.0">
+                    <columns>
+                      <TableColumn fx:id="serviceNameColumn" minWidth="0.0" onEditCommit="#changeServiceNameCellEvent" prefWidth="394.0" text="Nazwa usługi" />
+                        <TableColumn fx:id="serviceAmountOfHoursColumn" onEditCommit="#changeServiceAmountOfHoursCellEvent" prefWidth="94.0" text="Ilość godz." />
+                        <TableColumn fx:id="serviceUnitCostColumn" onEditCommit="#changeServiceUnitCostCellEvent" prefWidth="104.0" text="Koszt jednost." />
+                        <TableColumn fx:id="serviceCostColumn" prefWidth="96.0" text="Suma" />
+                    </columns>
+                     <VBox.margin>
+                        <Insets right="5.0" />
+                     </VBox.margin>
+                     <contextMenu>
+                        <ContextMenu>
+                          <items>
+                              <MenuItem mnemonicParsing="false" onAction="#deleteExistingService" text="Usuń" />
+                          </items>
+                        </ContextMenu>
+                     </contextMenu>
+                  </TableView>
+                  <Separator prefHeight="18.0" prefWidth="704.0" />
+                  <HBox prefHeight="53.0" prefWidth="704.0" spacing="20.0">
+                     <children>
+                        <VBox prefHeight="52.0" prefWidth="520.0">
+                           <children>
+                              <HBox prefHeight="19.0" prefWidth="506.0">
+                                 <children>
+                                    <Label text="Treść podsumowania" />
+                                    <Pane prefHeight="19.0" prefWidth="384.0">
+                                       <children>
+                                          <Label fx:id="pricingTotalAmountOfHoursLabel" layoutX="286.0" layoutY="1.0" text="Suma: " />
+                                       </children>
+                                    </Pane>
+                                 </children>
+                              </HBox>
+                              <TextField fx:id="pricingSummaryTextField" prefHeight="25.0" prefWidth="476.0" promptText="przykład: Działający I prototyp urządzenia" />
+                           </children>
+                        </VBox>
+                        <HBox prefHeight="58.0" prefWidth="193.0" spacing="5.0">
+                           <children>
+                              <VBox alignment="TOP_RIGHT" prefHeight="52.0" prefWidth="90.0">
+                                 <children>
+                                    <Label text="Suma netto:" />
+                                    <Label text="VAT 23%:" />
+                                    <Label text="Całkowity koszt:" />
+                                 </children>
+                              </VBox>
+                              <VBox alignment="TOP_RIGHT" prefHeight="52.0" prefWidth="78.0">
+                                 <children>
+                                    <Label fx:id="pricingNetCostLabel" text="0 PLN" />
+                                    <Label fx:id="pricingTaxCostLabel" text="0 PLN" />
+                                    <Label fx:id="pricingTotalCostLabel" text="0 PLN" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                     </children>
+                  </HBox>
                </children>
             </VBox>
          </center>

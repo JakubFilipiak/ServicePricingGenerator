@@ -1,0 +1,13 @@
+model\Client.class
+model\Service$ServiceBuilder.class
+controller\Controller.class
+model\Company.class
+model\PdfDrawer.class
+model\Pricing.class
+model\Pricing$PricingBuilder.class
+model\Service.class
+view\App.class
+model\Author.class
+model\Client$ClientBuilder.class
+model\Author$AuthorBuilder.class
+model\Company$CompanyBuilder.class

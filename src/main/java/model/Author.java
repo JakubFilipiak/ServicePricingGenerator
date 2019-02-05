@@ -5,22 +5,15 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.io.File;
-
 /**
- * Created by Jakub Filipiak on 01.02.2019.
+ * Created by Jakub Filipiak on 03.02.2019.
  */
 @Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Company {
+public class Author {
 
     private String name;
-    private String address;
     private String email;
-    private String website;
-    private String mobile;
-    private String taxNumber;
-    File logoFile;
 }
