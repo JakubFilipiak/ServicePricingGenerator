@@ -64,7 +64,7 @@
                               <Label layoutY="174.0" text="Telefon kontaktowy" />
                               <TextField fx:id="companyMobileTextField" layoutY="191.0" prefHeight="25.0" prefWidth="188.0" />
                               <Label layoutY="216.0" text="NIP" />
-                              <TextField fx:id="companyTaxNumberTextField" layoutY="233.0" prefHeight="25.0" prefWidth="188.0" />
+                              <TextField fx:id="companyTaxNumberTextField" disable="true" layoutY="233.0" prefHeight="25.0" prefWidth="188.0" />
                               <Label layoutY="258.0" text="Logo" />
                               <Button fx:id="logoFileChooserButton" layoutX="107.0" layoutY="300.0" mnemonicParsing="false" onAction="#chooseLogoFile" text="Wybierz plik" />
                               <Separator layoutX="1.0" layoutY="324.0" prefHeight="25.0" prefWidth="187.0" />
@@ -129,7 +129,7 @@
                      </VBox.margin></Label>
                   <HBox prefHeight="42.0" prefWidth="710.0">
                      <children>
-                        <TextArea fx:id="pricingCommentTextField" prefWidth="511.0" wrapText="true">
+                        <TextArea fx:id="pricingCommentTextField" disable="true" prefHeight="42.0" prefWidth="495.0" wrapText="true">
                            <HBox.margin>
                               <Insets left="5.0" />
                            </HBox.margin></TextArea>
@@ -249,7 +249,7 @@
                                     <Label text="Treść podsumowania" />
                                     <Pane prefHeight="19.0" prefWidth="384.0">
                                        <children>
-                                          <Label fx:id="pricingTotalAmountOfHoursLabel" layoutX="286.0" layoutY="1.0" text="Suma: " />
+                                          <Label fx:id="pricingTotalAmountOfHoursLabel" layoutX="286.0" layoutY="1.0" text="Suma:   0 godz." />
                                        </children>
                                     </Pane>
                                  </children>
@@ -257,7 +257,7 @@
                               <TextField fx:id="pricingSummaryTextField" prefHeight="25.0" prefWidth="476.0" promptText="przykład: Działający I prototyp urządzenia" />
                            </children>
                         </VBox>
-                        <HBox prefHeight="58.0" prefWidth="193.0" spacing="5.0">
+                        <HBox prefHeight="52.0" prefWidth="214.0" spacing="5.0">
                            <children>
                               <VBox alignment="TOP_RIGHT" prefHeight="52.0" prefWidth="90.0">
                                  <children>
@@ -266,7 +266,7 @@
                                     <Label text="Całkowity koszt:" />
                                  </children>
                               </VBox>
-                              <VBox alignment="TOP_RIGHT" prefHeight="52.0" prefWidth="78.0">
+                              <VBox alignment="TOP_RIGHT" prefHeight="52.0" prefWidth="88.0">
                                  <children>
                                     <Label fx:id="pricingNetCostLabel" text="0 PLN" />
                                     <Label fx:id="pricingTaxCostLabel" text="0 PLN" />

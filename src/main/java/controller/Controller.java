@@ -13,6 +13,7 @@ import javafx.util.converter.IntegerStringConverter;
 import model.*;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
@@ -23,13 +24,14 @@ import java.util.ResourceBundle;
 public class Controller implements Initializable {
 
     private File logoFileTmp;
+    public File pricingFile;
     private LocalDate localDate = LocalDate.now();
 
     public Company company = new Company();
     public Client client = new Client();
     public Author author = new Author();
     public Pricing pricing = new Pricing();
-    ObservableList<Service> services = FXCollections.observableArrayList();
+    public ObservableList<Service> services = FXCollections.observableArrayList();
 
 
 
@@ -100,7 +102,7 @@ public class Controller implements Initializable {
         companyEmailTextField.setDisable(false);
         companyWebsiteTextField.setDisable(false);
         companyMobileTextField.setDisable(false);
-        companyTaxNumberTextField.setDisable(false);
+        companyTaxNumberTextField.setDisable(true);
         logoFileNameLabel.setDisable(false);
         logoFileChooserButton.setDisable(false);
         saveCompanyButton.setDisable(false);
@@ -385,13 +387,9 @@ public class Controller implements Initializable {
     }
 
     @FXML
-    public void createPricingFile() {
+    public void createPricingFile() throws IOException {
         pricing.setSummary(pricingSummaryTextField.getText());
         pricing.setComment(pricingCommentTextField.getText());
-
-
-
-
 
         //What is in 'database'
         System.out.println("-------------------------------");
@@ -406,5 +404,27 @@ public class Controller implements Initializable {
         System.out.println(pricing.toString());
         System.out.println("-------------------------------");
         //End of "What is in 'database'"
+
+        //Generating a pdf file
+        PdfDrawer pdfDrawer = new PdfDrawer(company, client, author, pricing, services);
+        pdfDrawer.importFonts();
+        pdfDrawer.drawHeader();
+        pdfDrawer.drawTable();
+        pdfDrawer.drawFooter();
+
+
+
+        FileChooser saveFileChooser = new FileChooser();
+        saveFileChooser.setTitle("Zapisz plik wyceny");
+        saveFileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter(
+                "PDF", "*.pdf"));
+        if(!pricing.getName().isEmpty()) {
+            saveFileChooser.setInitialFileName(pricing.getName() + " - wycena");
+        } else {
+            saveFileChooser.setInitialFileName("wycena - " + pricing.getPreparationDate().toString());
+        }
+        File pricingFile = saveFileChooser.showSaveDialog(null);
+
+        pdfDrawer.closeStreamAndSaveFile(pricingFile);
     }
 }
